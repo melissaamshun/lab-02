@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     /* 4. What are the input parameters and return value of socket()
-     *
+     * IPv4, sequenced 2-way, connection-based, set prot
      */
     
     if (sockfd < 0) 
@@ -54,14 +54,16 @@ int main(int argc, char *argv[])
              sizeof(serv_addr)) < 0) 
              error("ERROR on binding");
     /* 5. What are the input parameters of bind() and listen()?
-     *
+     * bind(s, a): binds socket s to addy a
+     * listen(s, x): listen to connections on a socket s with x space on queue
      */
     
     listen(sockfd,5);
     clilen = sizeof(cli_addr);
     
     while(1) {
-        /* 6.  Why use while(1)? Based on the code below, what problems might occur if there are multiple simultaneous connections to handle?
+        /* 6.  Why use while(1)? Based on the code below, what problems might 
+        * occur if there are multiple simultaneous connections to handle?
         *
         */
         
@@ -69,18 +71,19 @@ int main(int argc, char *argv[])
         newsockfd = accept(sockfd, 
                     (struct sockaddr *) &cli_addr, 
                     &clilen);
-	/* 7. Research how the command fork() works. How can it be applied here to better handle multiple connections?
-         * 
+	/* 7. Research how the command fork() works. How can it be applied here 
+	 * to better handle multiple connections?
+         * fork(): creates a new process concurent w parent
          */
         
 	if (newsockfd < 0) 
-             error("ERROR on accept");
+         error("ERROR on accept");
 	bzero(buffer,256);
         
 	n = read(newsockfd,buffer,255);
         if (n < 0) 
             error("ERROR reading from socket");
-        //printf("Here is the message: %s\n",buffer);
+        printf("Here is the message: %s\n",buffer);
         n = write(newsockfd,"I got your message",18);
         if (n < 0) 
             error("ERROR writing to socket");
@@ -90,6 +93,7 @@ int main(int argc, char *argv[])
     return 0; 
 }
   
-/* This program makes several system calls such as 'bind', and 'listen.' What exactly is a system call?
+/* This program makes several system calls such as 'bind', and 'listen.' 
+ * What exactly is a system call?
  *
  */
