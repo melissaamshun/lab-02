@@ -24,7 +24,7 @@ int main(int argc, char const *argv[])
 	
 	
 	// TODO: Fill out the server ip and port
-	std::string server_ip = "10.26.117.14";
+	std::string server_ip = "172.20.10.8";
 	std::string server_port = "6666";
 	
 
@@ -66,11 +66,11 @@ int main(int argc, char const *argv[])
 	
 	// TODO: Retreive user input
 	printf("Enter message:" );
-	bzero(socket_read_buffer,strlen(socket_read_buffer));
+	bzero(socket_read_buffer,255);
 	scanf("%19[^\n]", socket_read_buffer);
 	
 	// TODO: Send() the user input to the server
-       	n = write(client_fd,socket_read_buffer,256);
+       	n = write(client_fd,socket_read_buffer,255);
        	if (n<0){
        		error("ERROR writing");
        	}
