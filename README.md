@@ -51,7 +51,7 @@ Answer for Question 3:
 6. Why use while(1)? Based on the code below, what problems might 
    occur if there are multiple simultaneous connections to handle?
    
-   while(1) 
+   while(1) ; no simultaneous
    
 7. Research how the command fork() works. How can it be applied here 
    to better handle multiple connections?
