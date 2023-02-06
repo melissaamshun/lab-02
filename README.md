@@ -12,15 +12,15 @@ this repo and clone it to your machine to get started!
 ## Drive PDF
 Answer for Question 1: 
 
-   With 50% loss added, some numbers were missing on the server side and some sequences were fully lost.
+   With 50% loss added, some numbers were missing on the server side and some sequences were fully lost.  THis is because UDp does not provide the error correction to recover lost packets. 
    
 Answer for Question 2: 
    
-   Speed changes, but not reliability.
+   Reliability did not change for TCP; this is because TCP retransmits data back to the sender to recover any lost or corrupted packets.
    
 Answer for Question 3: 
   
-  
+  TCP response was slower after spamming sequences. TCP essentially does more to send packets (error correction, retransmission, ordering) to ensure reliability nd also modifies transmission rate to match the current bandwitdh.
   
 
 ## tcp_server.c
@@ -51,7 +51,7 @@ Answer for Question 3:
 6. Why use while(1)? Based on the code below, what problems might 
    occur if there are multiple simultaneous connections to handle?
    
-   while(1) ; no simultaneous
+   while(1) iterates the set of commands in its loop until the application is exited, making it useful for routines such as listening to and reading from a client; with multiple connections to handle the server might only connect to one client's socket.  
    
 7. Research how the command fork() works. How can it be applied here 
    to better handle multiple connections?
